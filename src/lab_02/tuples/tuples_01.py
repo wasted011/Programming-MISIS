@@ -1,16 +1,14 @@
-notes = tuple([input().strip(), input().strip(), float(input())])
-print(notes)
-def format_record(notes):
+def format_record(rec: tuple[str, str, float]) -> str:
     initials = ''
-    fio, group, gpa = notes[0].strip().split() , notes[1].strip(), notes[2]
-    if len(fio) < 2 or len(fio) > 3:
-        return TypeError
-    if len(group) == 0:
+    fio, group, gpa = rec[0].strip().split(), rec[1], rec[2]
+    if len(fio) > 3 or len(fio) < 2:
         return ValueError
-    for el in range(len(fio)):
-        if fio[el][0].isupper() == False:
-            fio[el] = fio[el].capitalize()
-    for el3 in range(1, len(fio)):
-        initials += fio[el3][0] + "."
-    return f"{fio[0]} {initials}, гр. {group}, GPA {gpa:.2f}"
-print(format_record(notes))
+    if not isinstance(gpa, float):
+        return TypeError
+    for index_01 in range(len(fio)):
+        fio[index_01] = fio[index_01].capitalize()
+        for el in fio[index_01]:
+            if el.isupper():
+                initials += el + "."
+    return f"{fio[0]} {initials[2:]}, гр. {group}, GPA {gpa:.2f}"
+print(format_record(("     сидорова   анна   сергеевна    ", "BIVT-25", 4.6)))

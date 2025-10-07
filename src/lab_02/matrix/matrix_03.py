@@ -1,19 +1,20 @@
-matrix = [
-    [1,2,3,4,5],
-    [4,5,6,7,8]
-]
-rows, columns = len(matrix), len(matrix[0])
-def transpose(matrix):
-    newmatrix = [[0] * rows for el in range(columns)]
-    for r in range(rows):
-        for c in range(columns):
-            newmatrix[c][r] = matrix[r][c]
-    return newmatrix
-new_matrix = transpose(matrix)
-def column_sums(new_matrix, columns, rows):
-    if columns != rows:
-        result = []
-        for el in range(columns):
-            result.append(sum(new_matrix[el]))
-    return result
-print(column_sums(new_matrix, columns, rows))
+def col_sums(mat: list[list[float | int]]) -> list[float]:
+    rows, columns = len(mat), len(mat[0])
+    sum_of_columns = []
+    for index in range(len(mat)):
+        if len(mat[index-1]) != len(mat[index]):
+            return ValueError
+    if rows == columns:
+        return "Матрица является квадратной, требуется прямоугольность (по усл.)"
+    def transpose(mat: list[list[float | int]], rows: int, columns: int) -> list[float]:
+        if len(mat) == 0:
+            return mat
+        sample_of_matrix = [[0] * rows for el in range(columns)]
+        for r in range(rows):
+            for c in range(columns):
+                sample_of_matrix[c][r] = mat[r][c]
+        return sample_of_matrix
+    for el in transpose(mat, rows, columns):
+        sum_of_columns.append(sum(el))
+    return sum_of_columns
+print(col_sums([[1,2,3,4,5],[4,5,6,7,8]]))

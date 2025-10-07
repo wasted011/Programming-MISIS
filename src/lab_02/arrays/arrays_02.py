@@ -1,4 +1,3 @@
-list_02 = list(map(int, input().split()))
-def unique_sorted(list_def):
-    return sorted(set(list_def))
-print(unique_sorted(list_02))
+def unique_sorted(nums: list[float | int]) -> list[float | int]:
+    return sorted(set(nums))
+print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))

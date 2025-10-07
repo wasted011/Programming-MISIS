@@ -1,11 +1,8 @@
-list_03 = [[1,2], (3,4), [5,6], (7,8)]
-def flatten(list_def):
-    empty = []
-    for el in list_def:
-        if isinstance(el, (list, tuple)) == False:
+def flatten(mat: list[list | tuple]) -> list:
+    flatten_mat = []
+    for el in mat:
+        if not isinstance(el, (list, tuple)):
             return TypeError
-        else:
-            empty += el
-    return empty
-print(flatten(list_03))
-            
+        flatten_mat += el
+    return flatten_mat
+print(flatten([[1, 2], (3, 4, 5)]))
