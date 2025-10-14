@@ -15,4 +15,4 @@ def script(text: str, n: int = 5):
     for el in unique_words[:n]:
         print(f"{el}: {text.count(el)}")
     return "---------"
-print(script(""))
+print(script("мир ёжик ёжик мир мир евгений евгений!!!!"))
