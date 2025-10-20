@@ -1,18 +1,13 @@
-import re
+import sys
+sys.path.append("C:\GitHub\Programming-MISIS\Programming-MISIS\src")
+from lib import *
 def script(text: str, n: int = 5):
-    print("---------")
-    text = text.casefold().replace("Ё", "Е").replace("ё", "е")
-    text = re.sub(r"[\t\r\n]", " ", text)
-    text = re.sub(r"\s+", " ", text).strip()
-    text = re.findall(r"\w+(?:-\w+)*", text)
-    len_unique_words = len(list(set(text)))
-    total_words = len(text)
-    unique_words = list(set(text))
-    unique_words.sort()
-    print(f"Всего слов: {total_words}")
-    print(f"Уникальных: {len_unique_words}")
-    print(f"Топ-5: {len(unique_words[:n])}")
-    for el in unique_words[:n]:
-        print(f"{el}: {text.count(el)}")
-    return "---------"
-print(script("мир ёжик ёжик мир мир евгений евгений!!!!"))
+    print(f"------------")
+    print(f"Всего слов: {len(tokenize(normalize(text)))}")
+    print(f"Уникальных слов: {len(set(tokenize(normalize(text))))}")
+    print("Топ-5:")
+    text = top_n(count_freq(tokenize(normalize(text))))
+    for el in text:
+        print(f"{el[0]}: {el[1]}")
+    return "------------"
+print(script("привет привет привет привет мир мир мир мир"))
