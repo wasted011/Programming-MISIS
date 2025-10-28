@@ -89,7 +89,7 @@ def script_01(text: str, n: int = 5):
         print(f"{el[0]}: {el[1]}")
     return "------------"
 
-# CSV/TXT
+# FILES
 
 def read_text(path: str | Path, encoding: str = "utf-8-sig") -> str:
     p = Path(path)
@@ -102,12 +102,31 @@ def read_text(path: str | Path, encoding: str = "utf-8-sig") -> str:
 
 def write_csv(rows: Iterable[Sequence], path: str | Path,
               header: tuple[str, ...] | None = None) -> None:
+    if Path(path).suffix == ".csv":
+        p = Path(path)
+        rows = list(rows)
+        for index in range(1, len(rows)):
+            if len(rows[index-1]) != len(rows[index]):
+                raise ValueError
+        with p.open("w", newline="", encoding="utf-8-sig") as f:
+            w = csv.writer(f)
+            if header is not None:
+                w.writerow(header)
+            for r in rows:
+                w.writerow(r)
+        return "Файл обработан корректно"
+    elif Path(path).suffix != ".csv":
+        return "Некорректное расширение"
+
+def write_file(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...] | None = None) -> None:
     p = Path(path)
     rows = list(rows)
+    if len(rows) == 0:
+        raise FileNotFoundError
     for index in range(1, len(rows)):
         if len(rows[index-1]) != len(rows[index]):
             raise ValueError
-    with p.open("w", newline="", encoding="utf-8-sig") as f:
+    with p.open("w", newline = "", encoding="utf-8-sig") as f:
         w = csv.writer(f)
         if header is not None:
             w.writerow(header)
