@@ -1,7 +1,8 @@
 import re
-import csv
+import csv, json
 from pathlib import Path
 from typing import Iterable, Sequence
+from openpyxl import Workbook
 
 #Arrays
 
@@ -108,7 +109,7 @@ def write_csv(rows: Iterable[Sequence], path: str | Path,
         for index in range(1, len(rows)):
             if len(rows[index-1]) != len(rows[index]):
                 raise ValueError
-        with p.open("w", newline="", encoding="utf-8-sig") as f:
+        with p.open("w", newline = '', encoding = "utf-8-sig") as f:
             w = csv.writer(f)
             if header is not None:
                 w.writerow(header)
@@ -123,12 +124,76 @@ def write_file(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ..
     rows = list(rows)
     if len(rows) == 0:
         raise FileNotFoundError
-    for index in range(1, len(rows)):
-        if len(rows[index-1]) != len(rows[index]):
-            raise ValueError
-    with p.open("w", newline = "", encoding="utf-8-sig") as f:
+    with p.open("w", newline = None, encoding="utf-8-sig") as f:
         w = csv.writer(f)
         if header is not None:
             w.writerow(header)
-        for r in rows:
-            w.writerow(r)
+        w.writerow(rows)
+
+def write_csv_lib(rows: Iterable[Sequence], path: str | Path,
+              header: tuple[str, ...] | None = None) -> None:
+    if Path(path).suffix == ".csv":
+        p = Path(path)
+        rows = list(rows)
+        with p.open("w", newline = '', encoding = "utf-8-sig") as f:
+            w = csv.writer(f)
+            if header is not None:
+                w.writerow(header)
+            w.writerow(rows)
+        return "Файл обработан корректно"
+    elif Path(path).suffix != ".csv":
+        return "Некорректное расширение"
+
+def json_load(json_path: str | Path) -> None:
+    json_path = Path(json_path)
+    with json_path.open('r', newline='', encoding='utf-8') as file:
+        data = json.load(file)
+    return data
+
+def json_to_csv(json_path: str | Path, csv_path: str | Path) -> None:
+    json_path = Path(json_path)
+    try:
+        values_of_csv = [values for keys, values in json_load(json_path).items()]
+        keys_of_csv = [keys for keys, values in json_load(json_path).items()]
+        write_csv_lib(values_of_csv, csv_path, keys_of_csv)
+    except not json_path.exists():
+        raise FileNotFoundError
+    except (json_path.stat().st_size or csv_path.stat().st_size) == 0:
+        return ValueError
+    return 'Успешно'
+
+def read_csv_as_dict(csv_path: str | Path) -> None:
+    csv_path = Path(csv_path)
+    with csv_path.open('r', newline='', encoding='utf-8-sig') as file:
+        read_csv = csv.DictReader(file)
+        for element in read_csv:
+            return element
+
+def csv_to_json(csv_path: str | Path, json_path: str | Path) -> None:
+    json_path, csv_path = Path(json_path), Path(csv_path)
+    dict_csv = read_csv_as_dict(csv_path)
+    try:
+        with json_path.open('w', newline='', encoding='utf-8-sig') as file:
+            json.dump(dict_csv, file, ensure_ascii=False, indent=2)
+    except not csv_path.exists():
+        raise FileNotFoundError
+    except (json_path.stat().st_size or csv_path.stat().st_size) == 0:
+        return ValueError
+    return 'Успешно'
+
+
+def csv_to_xlsx(csv_path: str | Path, xlsx_path: str | Path) -> None:
+    csv_path, xlsx_path = Path(csv_path), Path(xlsx_path)
+    try:
+        wb = Workbook()
+        ws = wb.active
+        ws.title = "Sheet_1"
+        with csv_path.open(encoding='utf-8-sig') as file:
+            for element in csv.reader(file):
+                ws.append(element)
+        wb.save(Path(xlsx_path))
+        return "Успешно"
+    except (csv_path.stat().st_size or xlsx_path.stat().st_size) == 0:
+        raise ValueError
+    except not csv_path.exists() or not xlsx_path.exist():
+        raise FileNotFoundError
