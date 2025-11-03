@@ -20,17 +20,17 @@ csv_2_xlsx.add_argument('--output', required=True)
 args = parser.parse_args()
 
 if args.command == 'json2csv':
-    if (Path(args.input).stat().st_size and Path(args.input).stat().st_size) != 0:
+    if (Path(args.input).stat().st_size and Path(args.output).stat().st_size) != 0:
         print(json_to_csv(args.input, args.output))
     else:
         raise TypeError
 elif args.command == 'csv2json':
-    if (Path(args.input).stat().st_size and Path(args.input).stat().st_size) != 0:
+    if (Path(args.input).stat().st_size and Path(args.output).stat().st_size) != 0:
         print(csv_to_json(args.input, args.output))
     else:
         raise TypeError
 elif args.command == 'csv2xlsx':
-    if (Path(args.input).stat().st_size and Path(args.input).stat().st_size) != 0:
+    if (Path(args.input).stat().st_size and Path(args.output).stat().st_size) != 0:
         print(csv_to_xlsx(args.input, args.output))
     else:
         raise TypeError
