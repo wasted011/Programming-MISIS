@@ -1,5 +1,12 @@
-﻿{
-  "name": "Peter",
-  "age": "18",
-  "city": "Moscow"
-}
+﻿[
+  {
+    "name": "Peter",
+    "age": "18",
+    "city": "Moscow"
+  },
+  {
+    "name": "smth",
+    "age": "smth",
+    "city": "smth"
+  }
+]

@@ -26,16 +26,19 @@ print(json_to_csv('data/lab_05/json_to_csv.json', 'data/lab_05/json_to_csv.csv')
 
 def read_csv_as_dict(csv_path: str | Path) -> None:
     csv_path = Path(csv_path)
+    clean_list = []
     with csv_path.open('r', newline='', encoding='utf-8-sig') as file:
         read_csv = csv.DictReader(file)
         for element in read_csv:
-            return element
+            clean_list.append(element)
+    return clean_list
+
 def csv_to_json(csv_path: str | Path, json_path: str | Path) -> None:
     json_path, csv_path = Path(json_path), Path(csv_path)
     dict_csv = read_csv_as_dict(csv_path)
     try:
         with json_path.open('w', newline='', encoding='utf-8-sig') as file:
-            json.dump(dict_csv, file, ensure_ascii=False, indent=2)
+            json.dump(dict_csv, file, indent = 2, ensure_ascii = False)
             return "Успешно"
     except not csv_path.exists():
         raise FileNotFoundError
