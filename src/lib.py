@@ -12,6 +12,8 @@ def unique_sorted(nums: list[float | int]) -> list[float | int]:
 def flatten(mat: list[list | tuple]) -> list:
     flatten_mat = []
     for el in mat:
+        if not isinstance(el, (list, tuple)):
+            return TypeError
         flatten_mat += el
     return flatten_mat
 
@@ -79,13 +81,16 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     return tuple_list[:n]
 
 def script_01(text: str, n: int = 5):
+    counter = 0
     print(f"------------")
     print(f"Всего слов: {len(tokenize(normalize(text)))}")
     print(f"Уникальных слов: {len(set(tokenize(normalize(text))))}")
-    print("Топ-5:")
+    print(f"Топ-{n}:")
     text = top_n(count_freq(tokenize(normalize(text))))
     for el in text:
-        print(f"{el[0]}: {el[1]}")
+        counter += 1
+        if counter <= n:
+            print(f"{el[0]}: {el[1]}")
     return "------------"
 
 # FILES
