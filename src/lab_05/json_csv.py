@@ -4,9 +4,11 @@ from lib import *
 
 def json_load(json_path: str | Path) -> None:
     json_path = Path(json_path)
-    with json_path.open('r', newline='', encoding='utf-8-sig') as file:
-        data = json.load(file)
-    return data
+    if json_path.suffix == ".json":
+        with json_path.open('r', newline='', encoding='utf-8-sig') as file:
+            data = json.load(file)
+        return data
+    return "Неверный формат файла"
 
 def json_to_csv(json_path: str | Path, csv_path: str | Path) -> None:
     json_path = Path(json_path)
@@ -26,12 +28,14 @@ print(json_to_csv('data/lab_05/json_to_csv.json', 'data/lab_05/json_to_csv.csv')
 
 def read_csv_as_dict(csv_path: str | Path) -> None:
     csv_path = Path(csv_path)
-    clean_list = []
-    with csv_path.open('r', newline='', encoding='utf-8-sig') as file:
-        read_csv = csv.DictReader(file)
-        for element in read_csv:
-            clean_list.append(element)
-    return clean_list
+    if csv_path.suffix == ".csv":
+        clean_list = []
+        with csv_path.open('r', newline='', encoding='utf-8-sig') as file:
+            read_csv = csv.DictReader(file)
+            for element in read_csv:
+                clean_list.append(element)
+        return clean_list
+    return "Неверный формат файла"
 
 def csv_to_json(csv_path: str | Path, json_path: str | Path) -> None:
     json_path, csv_path = Path(json_path), Path(csv_path)
@@ -43,5 +47,5 @@ def csv_to_json(csv_path: str | Path, json_path: str | Path) -> None:
     except not csv_path.exists():
         raise FileNotFoundError
     except (json_path.stat().st_size or csv_path.stat().st_size) == 0:
-        return ValueError
+        raise ValueError
 print(csv_to_json('data/lab_05/csv_to_json.csv', 'data/lab_05/csv_to_json.json'))

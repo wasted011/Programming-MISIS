@@ -1,2 +1,6 @@
-name,age,city
-Vanya,25,Moscow
+﻿{
+  "{": "  \"name\": \"Vanya\"",
+  "null": [
+    ""
+  ]
+}

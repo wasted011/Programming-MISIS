@@ -17,6 +17,6 @@ def csv_to_xlsx(csv_path: str | Path, xlsx_path: str | Path) -> None:
         return "Успешно"
     except (csv_path.stat().st_size or xlsx_path.stat().st_size) == 0:
         raise ValueError
-    except not csv_path.exists() or not xlsx_path.exist():
+    except not csv_path.exists() or not xlsx_path.exists():
         raise FileNotFoundError
 print(csv_to_xlsx('data/lab_05/csv_to_xlsx.csv', 'data/lab_05/csv_to_xlsx.xlsx'))
