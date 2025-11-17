@@ -75,6 +75,9 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
         })
     return new_dict
 
+def norm_token_freq(text: str) -> dict[str, int]:
+    return count_freq(tokenize(normalize(text)))
+
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     tuple_list = list(freq.items())
     tuple_list = sorted(tuple_list, key = lambda el: (-el[1], el[0]))

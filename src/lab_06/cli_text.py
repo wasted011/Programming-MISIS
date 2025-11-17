@@ -4,6 +4,12 @@ from pathlib import Path
 sys.path.append('src')
 from lib import *
 
+def is_not_empty(input_argument: str | Path) -> bool:
+    path_input_argument = Path(input_argument)
+    if path_input_argument.stat().st_size != 0:
+        return True
+    return False
+
 def main():
 
     parser = argparse.ArgumentParser(description="CLI‑утилиты лабораторной №6")
@@ -22,7 +28,7 @@ def main():
     args = parser.parse_args()
 
     if args.command == "cat":
-        if Path(args.input).stat().st_size != 0:
+        if is_not_empty(args.input):
             if args.n:
                 for index, element in enumerate(read_text(Path(args.input)).split()):
                     print(f"{index+1}: {element}")
@@ -32,14 +38,13 @@ def main():
         else:
             raise FileNotFoundError
     elif args.command == "stats":
-        if Path(args.input).stat().st_size != 0:
+        if is_not_empty(args.input):
             text_line = read_text(Path(args.input))
             if args.top:
                 print(script_01(text_line, args.top))
             else:
-                part_01, part_02 = normalize(text_line),  tokenize(part_01)
-                part_03 = count_freq(part_02)
-                for keys, values in part_03.items():
+                argument = norm_token_freq(text_line)
+                for keys, values in argument.items():
                     print(f"{keys}: {values}")
         else:
             raise FileNotFoundError
