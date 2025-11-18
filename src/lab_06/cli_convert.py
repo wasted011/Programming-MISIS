@@ -2,12 +2,6 @@ import sys, argparse
 sys.path.append('src')
 from lib import *
 
-def is_not_empty(input_argument: str, output_argument: str) -> bool:
-    path_input_argument, path_output_argument = Path(input_argument), Path(output_argument)
-    if path_input_argument.stat().st_size and path_output_argument.stat().st_size != 0:
-        return True
-    return False
-
 def main():
     
     parser = argparse.ArgumentParser(description='Convertion')
@@ -28,19 +22,10 @@ def main():
     args = parser.parse_args()
 
     if args.command == 'json2csv':
-        if is_not_empty(args.input, args.output):
-            print(json_to_csv(args.input, args.output))
-        else:
-            raise TypeError
+        print(json_to_csv(args.input, args.output))
     elif args.command == 'csv2json':
-        if is_not_empty(args.input, args.output):
-            print(csv_to_json(args.input, args.output))
-        else:
-            raise TypeError
+        print(csv_to_json(args.input, args.output))
     elif args.command == 'csv2xlsx':
-        if is_not_empty(args.input, args.output):
-            print(csv_to_xlsx(args.input, args.output))
-        else:
-            raise TypeError
+        print(csv_to_xlsx(args.input, args.output))
 
 main()
