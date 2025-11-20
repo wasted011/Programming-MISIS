@@ -1,8 +1,10 @@
-import json, csv, sys, pathlib
-sys.path.append('src')
-from lib import *
+import json, csv, sys, os
+from pathlib import *
 
-def json_load(json_path: str | Path) -> None:
+sys.path.append('src')
+from _lib_ import *
+
+def json_load(json_path: str | Path):
     json_path = Path(json_path)
     if json_path.suffix == ".json":
         with json_path.open('r', newline='', encoding='utf-8-sig') as file:
@@ -11,19 +13,20 @@ def json_load(json_path: str | Path) -> None:
     return "Неверный формат файла"
 
 def json_to_csv(json_path: str | Path, csv_path: str | Path) -> None:
-    json_path = Path(json_path)
-    all_in_once_dict = {}
-    try:
-        for element in json_load(json_path):
-            all_in_once_dict.update(element)
-        keys = [keys for keys, values in all_in_once_dict.items()]
-        values = [values for keys, values in all_in_once_dict.items()]
-        write_csv_lib(values, csv_path, keys)
+    json_path, csv_path = Path(json_path), Path(csv_path)
+    with json_path.open('r', newline = '', encoding = 'utf-8-sig') as file:
+        data = json_load(json_path)
+        if isinstance(data, list):
+            csv_header = [element for element in data[0]]
+            data = list(data)
+        elif isinstance(data, dict):
+            csv_header = data.keys()
+            data = [data]
+    with csv_path.open('w', newline = '', encoding = 'utf-8-sig') as file:
+        csv_file = csv.DictWriter(file, fieldnames=csv_header)
+        csv_file.writeheader(), csv_file.writerows(data)
         return "Успешно"
-    except not json_path.exists():
-        raise FileNotFoundError
-    except (json_path.stat().st_size or csv_path.stat().st_size) == 0:
-        return ValueError
+
 print(json_to_csv('data/lab_05/json_to_csv.json', 'data/lab_05/json_to_csv.csv'))
 
 def read_csv_as_dict(csv_path: str | Path) -> None:

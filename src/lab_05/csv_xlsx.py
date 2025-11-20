@@ -1,8 +1,9 @@
-import sys, csv
+import sys, csv, os
 from pathlib import Path
 from openpyxl import Workbook 
+
 sys.path.append('src')
-from lib import *
+from _lib_ import *
 
 def csv_to_xlsx(csv_path: str | Path, xlsx_path: str | Path) -> None:
     csv_path, xlsx_path = Path(csv_path), Path(xlsx_path)

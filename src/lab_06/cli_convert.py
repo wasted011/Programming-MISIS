@@ -1,6 +1,8 @@
-import sys, argparse
+import sys, argparse, os
+
 sys.path.append('src')
-from lib import *
+from _lib_ import *
+
 
 def main():
     

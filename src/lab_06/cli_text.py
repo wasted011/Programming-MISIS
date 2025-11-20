@@ -1,8 +1,8 @@
-import argparse, sys
+import argparse, sys, os
 from pathlib import Path
 
 sys.path.append('src')
-from lib import *
+from _lib_ import *
 
 def is_not_empty(input_argument: str | Path) -> bool:
     path_input_argument = Path(input_argument)

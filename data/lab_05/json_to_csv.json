@@ -3,6 +3,11 @@
     "name": "Pavel",
     "age": "20",
     "city": "Samara"
+},
+    {
+        "name": "smth",
+        "age": null,
+        "city": null
 }
 ]
 

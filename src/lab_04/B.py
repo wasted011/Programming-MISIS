@@ -1,6 +1,8 @@
-import sys
-sys.path.append("C:\GitHub\Programming-MISIS\Programming-MISIS\src")
-from lib import *
+import sys, os
+
+sys.path.append('src')
+from _lib_ import *
+
 def script_02(text: str):
     tok_norm = tokenize(normalize(text))
     freq_top = top_n(count_freq(tok_norm))

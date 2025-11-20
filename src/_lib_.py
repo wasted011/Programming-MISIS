@@ -152,7 +152,7 @@ def write_csv_lib(rows: Iterable[Sequence], path: str | Path,
 
 def json_load(json_path: str | Path) -> None:
     json_path = Path(json_path)
-    with json_path.open('r', newline='', encoding='utf-8') as file:
+    with json_path.open('r', newline='', encoding='utf-8-sig') as file:
         data = json.load(file)
     return data
 
@@ -170,10 +170,12 @@ def json_to_csv(json_path: str | Path, csv_path: str | Path) -> None:
 
 def read_csv_as_dict(csv_path: str | Path) -> None:
     csv_path = Path(csv_path)
+    clear_list = []
     with csv_path.open('r', newline='', encoding='utf-8-sig') as file:
         read_csv = csv.DictReader(file)
         for element in read_csv:
-            return element
+            clear_list.append(element)
+        return clear_list
 
 def csv_to_json(csv_path: str | Path, json_path: str | Path) -> None:
     json_path, csv_path = Path(json_path), Path(csv_path)
@@ -203,3 +205,9 @@ def csv_to_xlsx(csv_path: str | Path, xlsx_path: str | Path) -> None:
         raise ValueError
     except not csv_path.exists() or not xlsx_path.exist():
         raise FileNotFoundError
+
+def is_not_empty(input_argument: str | Path) -> bool:
+    path_input_argument = Path(input_argument)
+    if path_input_argument.stat().st_size != 0:
+        return True
+    return False

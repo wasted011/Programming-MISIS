@@ -2,11 +2,13 @@
   {
     "name": "Peter",
     "age": "18",
-    "city": "Moscow"
+    "city": "Moscow",
+    "he": null
   },
   {
     "name": "smth",
     "age": "smth",
-    "city": null
+    "city": "smth",
+    "he": null
   }
 ]

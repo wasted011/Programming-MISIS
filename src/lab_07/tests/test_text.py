@@ -1,12 +1,13 @@
-import pytest, sys
-sys.path.append('src')
-from lib import *
+import pytest, sys, os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from lib.functions import *
 
 normalize_test = [
-        ("ПрИвЕт\nМИр\t", "привет мир"),
-        ("ёжик, Ёлка", "ежик, елка"),
-        ("Hello\r\nWorld", "hello world"),
-        ("  двойные   пробелы  ", "двойные пробелы"),
+    ("ПрИвЕт\nМИр\t", "привет мир"),
+    ("ёжик, Ёлка", "ежик, елка"),
+    ("Hello\r\nWorld", "hello world"),
+    ("  двойные   пробелы  ", "двойные пробелы"),
     ]
 
 tokenize_test = [
