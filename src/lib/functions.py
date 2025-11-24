@@ -211,3 +211,17 @@ def is_not_empty(input_argument: str | Path) -> bool:
     if path_input_argument.stat().st_size != 0:
         return True
     return False
+
+def none_to_null(json_read: list | dict) -> list | dict:
+    if isinstance(json_read, list):
+        for element in json_read:
+            for keys, values in element.items():
+                if element[keys] == None:
+                    element[keys] = ''
+    elif isinstance(json_read, dict):
+        for keys, values in json_read.items():
+            if json_read[keys] == None:
+                json_read[keys] = ''
+    else:
+        return None
+    return json_read
