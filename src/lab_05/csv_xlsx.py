@@ -1,9 +1,9 @@
-import sys, csv, os
+import csv
 from pathlib import Path
 from openpyxl import Workbook 
 
-sys.path.append('src')
-from _lib_ import *
+from lib.functions import *
+
 
 def csv_to_xlsx(csv_path: str | Path, xlsx_path: str | Path) -> None:
     csv_path, xlsx_path = Path(csv_path), Path(xlsx_path)
@@ -22,4 +22,5 @@ def csv_to_xlsx(csv_path: str | Path, xlsx_path: str | Path) -> None:
         except not csv_path.exists() or not xlsx_path.exists():
             raise FileNotFoundError
     return "Неверный формат файла"
+
 print(csv_to_xlsx('data/lab_05/csv_to_xlsx.csv', 'data/lab_05/csv_to_xlsx.xlsx'))

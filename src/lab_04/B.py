@@ -1,7 +1,4 @@
-import sys, os
-
-sys.path.append('src')
-from _lib_ import *
+from lib.functions import *
 
 def script_02(text: str):
     tok_norm = tokenize(normalize(text))

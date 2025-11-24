@@ -1,8 +1,7 @@
-import json, csv, sys, os
-from pathlib import *
+import json, csv
+from pathlib import Path
 
-sys.path.append('src')
-from _lib_ import *
+from lib.functions import *
 
 def json_load(json_path: str | Path):
     json_path = Path(json_path)

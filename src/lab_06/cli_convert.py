@@ -1,14 +1,14 @@
 import sys, argparse, os
 
 sys.path.append('src')
-from _lib_ import *
+from lib.functions import *
 
 
 def main():
     
     parser = argparse.ArgumentParser(description='Convertion')
     subparsers = parser.add_subparsers(dest='command')
-
+    
     json_2_csv_parser = subparsers.add_parser('json2csv', help = 'Перевод из json в csv')
     json_2_csv_parser.add_argument('--input', required=True, help = "Ввод директории входного файла")
     json_2_csv_parser.add_argument('--output', required=True, help = "Ввод директории файла выхода")
