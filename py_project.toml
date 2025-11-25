@@ -20,8 +20,6 @@ dev = [
     "platformdirs>=4.0.0",
     "packaging>=25.0",
     "pip>=25.3"
-    "mypy_extensions>=1.1.0"
-
 ]
 
 excel = [
