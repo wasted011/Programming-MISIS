@@ -1,6 +1,5 @@
 import pytest
 
-
 from lib.functions import *
 
 
@@ -8,7 +7,7 @@ normalize_test = [
     ("ПрИвЕт\nМИр\t", "привет мир"),
     ("ёжик, Ёлка", "ежик, елка"),
     ("Hello\r\nWorld", "hello world"),
-    ]
+]
 
 tokenize_test = [
     ("привет мир", ["привет", "мир"]),
@@ -28,22 +27,22 @@ top_n_test = [
     ({"hello": 1, "world": 1}, [("hello", 1), ("world", 1)]),
 ]
 
-@pytest.mark.parametrize("source, expected", normalize_test)
 
+@pytest.mark.parametrize("source, expected", normalize_test)
 def test_normalize_basic(source, expected):
     assert normalize(source) == expected
 
-@pytest.mark.parametrize("source, expected", tokenize_test)
 
+@pytest.mark.parametrize("source, expected", tokenize_test)
 def test_tokenize_basic(source, expected):
     assert tokenize(source) == expected
 
-@pytest.mark.parametrize("source, expected", count_freq_test)
 
+@pytest.mark.parametrize("source, expected", count_freq_test)
 def test_count_freq_basic(source, expected):
     assert count_freq(source) == expected
 
-@pytest.mark.parametrize("source, expected", top_n_test)
 
+@pytest.mark.parametrize("source, expected", top_n_test)
 def test_top_n_basic(source, expected):
     assert top_n(source) == expected

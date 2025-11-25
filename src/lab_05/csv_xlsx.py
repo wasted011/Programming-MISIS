@@ -1,6 +1,6 @@
 import csv
 from pathlib import Path
-from openpyxl import Workbook 
+from openpyxl import Workbook
 
 from lib.functions import *
 
@@ -12,10 +12,10 @@ def csv_to_xlsx(csv_path: str | Path, xlsx_path: str | Path) -> None:
             wb = Workbook()
             ws = wb.active
             ws.title = "Sheet_1"
-            with csv_path.open(encoding='utf-8-sig') as file:
+            with csv_path.open(encoding="utf-8-sig") as file:
                 for element in csv.reader(file):
                     ws.append(element)
-            wb.save('data/lab_05/csv_to_xlsx.xlsx')
+            wb.save("data/lab_05/csv_to_xlsx.xlsx")
             return "Успешно"
         except (csv_path.stat().st_size or xlsx_path.stat().st_size) == 0:
             raise ValueError
@@ -23,4 +23,5 @@ def csv_to_xlsx(csv_path: str | Path, xlsx_path: str | Path) -> None:
             raise FileNotFoundError
     return "Неверный формат файла"
 
-print(csv_to_xlsx('data/lab_05/csv_to_xlsx.csv', 'data/lab_05/csv_to_xlsx.xlsx'))
+
+print(csv_to_xlsx("data/lab_05/csv_to_xlsx.csv", "data/lab_05/csv_to_xlsx.xlsx"))

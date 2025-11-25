@@ -1,11 +1,15 @@
 n = int(input("in_1:"))
 counterochn = 0
 counterzaochn = 0
+
+
 def function(a):
     if a == "True":
         return True
     elif a == "False":
         return False
+
+
 for i in range(n):
     stroka = input(f"in_{i+2}:")
     stroka = stroka.split()
