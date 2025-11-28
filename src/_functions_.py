@@ -63,6 +63,7 @@ def col_sums(mat: list[list[float | int]]) -> list[float]:
 
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     if casefold == True:
+        print()
         text = text.casefold()
     if yo2e == True:
         text = text.replace("ё", "е").replace("Ё", "Е")
@@ -71,6 +72,8 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
 
     return text
 
+
+normalize("", casefold = True)
 
 def tokenize(text: str) -> list[str]:
     text = normalize(text)
@@ -180,18 +183,20 @@ def json_load(json_path: str | Path) -> None:
 
 
 def json_to_csv(json_path: str | Path, csv_path: str | Path) -> None:
-    json_path = Path(json_path)
-    try:
-        values_of_csv = [values for keys, values in json_load(json_path).items()]
-        keys_of_csv = [keys for keys, values in json_load(json_path).items()]
-        write_csv_lib(values_of_csv, csv_path, keys_of_csv)
-    except not json_path.exists():
-        raise FileNotFoundError
-    except (json_path.stat().st_size or csv_path.stat().st_size) == 0:
-        return ValueError
-    return "Успешно"
-
-
+    json_path, csv_path = Path(json_path), Path(csv_path)
+    with json_path.open("r", newline="", encoding="utf-8-sig") as file:
+        data = json_load(json_path)
+        if isinstance(data, list):
+            csv_header = [element for element in data[0]]
+            data = list(data)
+        elif isinstance(data, dict):
+            csv_header = data.keys()
+            data = [data]
+    with csv_path.open("w", newline="", encoding="utf-8-sig") as file:
+        csv_file = csv.DictWriter(file, fieldnames=csv_header)
+        csv_file.writeheader(), csv_file.writerows(data)
+        return "Успешно"
+    
 def read_csv_as_dict(csv_path: str | Path) -> None:
     csv_path = Path(csv_path)
     clear_list = []
@@ -252,3 +257,7 @@ def none_to_null(json_read: list | dict) -> list | dict:
     else:
         return None
     return json_read
+
+def write_json(item: dict, json_path: str | Path):
+    with Path(json_path).open('w', newline = '', encoding = 'utf-8-sig') as file:
+        json.dump(item, file, indent = 2, ensure_ascii = False)

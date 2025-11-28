@@ -11,7 +11,8 @@ def write_json(item: dict, json_path: str | Path):
 class student:
 
     def __init__(self, json_file: str | Path, students_dict: list = []):
-        self.json_file = json_file
+        if is_not_empty(json_file):
+            self.json_file = json_file
         self.students_list = students_dict
 
     def to_dict(self, fio: str, birthdate: str, group: str, gpa: float):
