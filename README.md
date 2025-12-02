@@ -13,3 +13,7 @@
 ### Переход: [Перейти](https://github.com/wasted011/Programming-MISIS/tree/main/src/lab_06)
 ## Лабораторная работа №7
 ### Переход: [Перейти](https://github.com/wasted011/Programming-MISIS/tree/main/src/lab_07)
+## Лабораторная работы №8
+### Переход: [Перейти](https://github.com/wasted011/Programming-MISIS/tree/main/src/lab_08)
+## Лабораторная работа №9
+### Переход: [Перейти](https://github.com/wasted011/Programming-MISIS/tree/main/src/lab_09)

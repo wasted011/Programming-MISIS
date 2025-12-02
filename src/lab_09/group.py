@@ -29,7 +29,7 @@ class group:
             for element in self.student_list:
                 if element["fio"] == fio:
                     return f"Фио: {element["fio"]}, Дата рождения: {element["birthdate"]}, Группа: {element["group"]}, GPA: {element["gpa"]}"
-            return "Фио не найдено"
+            return "Фио не существует"
         return "Список пуст"
     def remove_student(self, fio: str):
         if len(self.student_list) != 0:
@@ -39,8 +39,7 @@ class group:
                     write_json(self.student_list, self.json_file)
                     json_to_csv(self.json_file, self.csv_file)
                     return "Успешное удаление"
-            return "Фио не найдено"
-        return "Список пуст"
+            return "Фио не существует"
     def update_info(self, fio: str):
         new_info = {"fio": fio, "birthdate": input(": "), "group": input(": "), "gpa": float(input(": "))}
         if len(self.student_list) != 0:
@@ -51,10 +50,10 @@ class group:
                     write_json(self.student_list, self.json_file)
                     json_to_csv(self.json_file, self.csv_file)
                     return "Успешно обновление информации"
-            return "Фио не найдено"
+            return "Фио не существует"
         return "Список пуст"
 
-assert group('data/lab_09/group.csv', 'data/lab_09/group.json').add_student("dmitriy", "28.09", "bivt", 4.6) == "Успешно"
-assert group('data/lab_09/group.csv', 'data/lab_09/group.json').add_student("dmitrsssssiy", "28.09", "bivt", 4.6) == "Успешно"
-assert group('data/lab_09/group.csv', 'data/lab_09/group.json').remove_student("dmitrsssssiy") == "Успешное удаление"
-assert group('data/lab_09/group.csv', 'data/lab_09/group.json').find_student("dmitriy") == "Фио: dmitriy, Дата рождения: 28.09, Группа: bivt, GPA: 4.6"
+assert group('data/lab_09/group.csv', 'data/lab_09/group.json').add_student("dmittriy", "28.09", "bivt", 4.6) == "Успешно"
+assert group('data/lab_09/group.csv', 'data/lab_09/group.json').add_student("dmitrssssssiy", "28.09", "bivt", 4.6) == "Успешно"
+assert group('data/lab_09/group.csv', 'data/lab_09/group.json').remove_student("dmitrssssssiy") == "Успешное удаление"
+assert group('data/lab_09/group.csv', 'data/lab_09/group.json').find_student("dmittriy") == "Фио: dmittriy, Дата рождения: 28.09, Группа: bivt, GPA: 4.6"

@@ -261,3 +261,14 @@ def none_to_null(json_read: list | dict) -> list | dict:
 def write_json(item: dict, json_path: str | Path):
     with Path(json_path).open('w', newline = '', encoding = 'utf-8-sig') as file:
         json.dump(item, file, indent = 2, ensure_ascii = False)
+
+def students_to_json(students: list[dict], json_path: str | Path):
+    with Path(json_path).open('w', newline = '', encoding = 'utf-8-sig') as file:
+        json.dump(students, file, indent = 2, ensure_ascii = False)
+        return "Успешно"
+    
+def students_from_json(fio: str, json_path: str | Path):
+    if is_not_empty(Path(json_path)):
+        return json_load(Path(json_path))
+    else:
+        return "Пустой файл"

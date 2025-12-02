@@ -38,7 +38,7 @@ class Student:
                     self.student_list.append(new_student)
                     return "Успешное добавление"
                 else:
-                    return "Студент уже существует"
+                    return "Студент существует"
         else:
             self.student_list.append(new_student)
             return "Успешное добавление"
