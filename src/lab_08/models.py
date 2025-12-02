@@ -50,7 +50,7 @@ class Student:
                 else:
                     return "Фио не найдено"
         else:
-            return "Список пуст"
+            return "Пустой список"
 
     def __str__(self):
         return f"Фио: {self.fio}, Дата рождения: {self.birthdate}, Группа: {self.group}, GPA {self.gpa}"

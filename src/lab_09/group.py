@@ -53,7 +53,7 @@ class group:
             return "Фио не существует"
         return "Список пуст"
 
-assert group('data/lab_09/group.csv', 'data/lab_09/group.json').add_student("dmittriy", "28.09", "bivt", 4.6) == "Успешно"
-assert group('data/lab_09/group.csv', 'data/lab_09/group.json').add_student("dmitrssssssiy", "28.09", "bivt", 4.6) == "Успешно"
-assert group('data/lab_09/group.csv', 'data/lab_09/group.json').remove_student("dmitrssssssiy") == "Успешное удаление"
-assert group('data/lab_09/group.csv', 'data/lab_09/group.json').find_student("dmittriy") == "Фио: dmittriy, Дата рождения: 28.09, Группа: bivt, GPA: 4.6"
+assert group('data/lab_09/group.csv', 'data/lab_09/group.json').add_student("dmitriy", "28.09", "bivt", 4.6) == "Успешно"
+assert group('data/lab_09/group.csv', 'data/lab_09/group.json').add_student("dmitrsssssiy", "28.09", "bivt", 4.6) == "Успешно"
+assert group('data/lab_09/group.csv', 'data/lab_09/group.json').remove_student("dmitrsssssiy") == "Успешное удаление"
+assert group('data/lab_09/group.csv', 'data/lab_09/group.json').find_student("dmitriy") == "Фио: dmitriy, Дата рождения: 28.09, Группа: bivt, GPA: 4.6"
