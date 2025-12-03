@@ -167,10 +167,10 @@ def write_csv_lib(
         rows = list(rows)
         with p.open("w", newline="", encoding="utf-8-sig") as f:
             w = csv.writer(f)
-            if header is not None:
+            if header:
                 w.writerow(header)
             w.writerow(rows)
-        return "Файл обработан корректно"
+            return "Файл обработан корректно"
     elif Path(path).suffix != ".csv":
         return "Некорректное расширение"
 
