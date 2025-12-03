@@ -71,5 +71,5 @@ class Group:
     
     def _read_all(self):
         return read_text(self.csv_file)
-    
-print(Group().add_student("dmitriy", "2000", "bivt", 4.6))
+
+assert Group().add_student("evgeny", "2000", "bivt", 4.6) == "Успешное добавление"
