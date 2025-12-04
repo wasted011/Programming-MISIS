@@ -23,7 +23,7 @@ class Group:
             for element in self.students_list:
                 if element["fio"] != fio:
                     self.students_list.append(new_student)
-                    write_csv_lib([values for keys, values in element.items()], self.csv_file, [keys for keys, values in element.items])
+                    write_csv_lib([values for keys, values in element.items()], self.csv_file, [keys for keys, values in element.items()])
                     return "Успешное добавление"
                 else:
                     return "Студент уже существует"
