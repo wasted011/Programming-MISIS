@@ -74,6 +74,6 @@ class group:
         return "Файл пуст"
 
 assert group().add_student("smth", "smth", "smth", 4.6) == "Успешное добавление"
-assert group().add_student("evgeny", "10/10/2000", "bivt", 4.3) == "Успешное добавление"
-assert group().update_student("evgeny") == "Успешное обновление"
-assert group().remove_student("evgeny") == "Успешное удаление"
+assert group().add_student("evgeny01", "10/10/2000", "bivt", 4.3) == "Успешное добавление"
+assert group().update_student("evgeny01") == "Успешное обновление"
+assert group().remove_student("evgeny01") == "Успешное удаление"
