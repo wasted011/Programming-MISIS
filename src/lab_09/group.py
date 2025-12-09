@@ -72,3 +72,8 @@ class group:
         if is_not_empty(self.csv_file):
             return read_text(self.csv_file)
         return "Файл пуст"
+
+assert group().add_student("smth", "smth", "smth", 4.6) == "Успешное добавление"
+assert group().add_student("evgeny", "10/10/2000", "bivt", 4.3) == "Успешное добавление"
+assert group().update_student("evgeny") == "Успешное обновление"
+assert group().remove_student("evgeny") == "Успешное удаление"
