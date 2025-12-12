@@ -43,7 +43,7 @@ class group:
             return "Фио не найдено"
         else:
             return "Список пуст"
-    
+        
     def remove_student(self, fio: str):
         if len(self.student_list) != 0:
             for element in self.student_list:
@@ -54,7 +54,7 @@ class group:
                     return "Успешное удаление"
             return "Фио не найдено"
         return "Список пуст"
-        
+    
     def update_student(self, fio: str):
         updated_student = {"fio": fio, "birthdate": input(": "), "group": input(": "), "gpa": input(": ")}
         if len(self.student_list) != 0:
@@ -68,7 +68,7 @@ class group:
             return "Фио не найдено"
         return "Список пуст"
     
-    def read_all(self):
+    def read_all(self): 
         if is_not_empty(self.csv_file):
             return read_text(self.csv_file)
         return "Файл пуст"

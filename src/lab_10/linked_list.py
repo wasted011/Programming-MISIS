@@ -1,5 +1,3 @@
-from collections import deque
-
 class Node:
     def __init__(self, value, next=None):
         self.value = value
@@ -16,23 +14,24 @@ class SinglyLinkedList:
         if self.head is None:
             self.head = new_node
             self._size += 1
-            return 
+            return "Первый элемент добавлен"
 
-        # неэффективность: полный обход списка O(n)
         current = self.head
         while current.next is not None:
             current = current.next
         current.next = new_node
-        self._size += 1
+        self_size += 1
 
     def prepend(self, value):
+        """Добавить элемент в начало списка"""
         new_node = Node(value, next=self.head)
         self.head = new_node
-        self._size += 1
+        self_size += 1
 
     def insert(self, idx, value):
+        """Вставка по индексу — неполная реализация, есть ошибки"""
         if idx < 0:
-            raise IndexError("negative index is not supported")
+            raise IndexError("Negative index is not supported")
 
         if idx == 0:
             self.prepend(value)
@@ -42,8 +41,8 @@ class SinglyLinkedList:
         if idx <= self._size:
             for _ in range(idx - 1):
                 current = current.next
-            else:
-                return "Выход за границы"
+        else:
+            return "Выход за границы"
 
         new_node = Node(value, next=current.next)
         current.next = new_node
